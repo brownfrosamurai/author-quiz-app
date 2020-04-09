@@ -1,0 +1,20 @@
+.AddAuthorForm {
+  width: 80%;
+  margin: 50px 10%;
+}
+
+.AddAuthorForm_input {
+  margin-bottom: 20px;
+  width: 500px;
+}
+
+.AddAuthorForm_input > label {
+  display: block;
+}
+
+input[type="submit"] {
+  /* display: block; */
+  border-radius: 5px;
+  background-color: rgba(6, 142, 221, 0.959);
+  width: 100px;
+}
