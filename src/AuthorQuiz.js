@@ -74,7 +74,7 @@ function Continue({ show, onContinue }) {
         <div className='col-11'>
           <button
             className='btn btn-primary btn-lg float-right continue'
-            onContinue={onContinue}
+            onClick={onContinue}
           >
             continue
           </button>
