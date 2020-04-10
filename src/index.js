@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, withRouter } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import "./index.css";
 import AuthorQuiz from "./AuthorQuiz";
 import AddAuthorForm from "./AddAuthorForm";
@@ -87,36 +87,28 @@ function reducer(
         highlight: "",
         turnData: getTurnData(state.authors),
       });
+    case "ADD_AUTHOR":
+      return Object.assign({}, state, {
+        authors: state.authors.concat([action.author]),
+      });
     default:
       return state;
   }
 }
 
-let store = Redux.createStore(reducer);
-
-function App() {
-  return (
-    <ReactRedux.Provider store={store}>
-      <AuthorQuiz />
-    </ReactRedux.Provider>
-  );
-}
-
-const AuthorWrapper = withRouter(({ history }) => (
-  <AddAuthorForm
-    onAddAuthor={(author) => {
-      authors.push(author);
-      history.push("/");
-    }}
-  />
-));
+let store = Redux.createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
   <BrowserRouter>
-    <React.Fragment>
-      <Route exact path='/' component={App} />
-      <Route path='/add' component={AuthorWrapper} />
-    </React.Fragment>
+    <ReactRedux.Provider store={store}>
+      <React.Fragment>
+        <Route exact path='/' component={AuthorQuiz} />
+        <Route path='/add' component={AddAuthorForm} />
+      </React.Fragment>
+    </ReactRedux.Provider>
   </BrowserRouter>,
   document.getElementById("root")
 );
